@@ -6,7 +6,9 @@
 <title>lyno.loveyou</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 html,body{
     margin:0;
@@ -24,6 +26,7 @@ body{
     justify-content:center;
 }
 
+
 /* =========================
    شاشة الهكر
 ========================= */
@@ -35,9 +38,11 @@ body{
     padding:30px 20px;
     background:#010501;
     border:1px solid #00ff44;
+
     box-shadow:
         0 0 35px rgba(0,255,60,.4),
         inset 0 0 25px rgba(0,255,60,.1);
+
     text-align:center;
     overflow:hidden;
 }
@@ -58,18 +63,27 @@ body{
     font-size:18px;
     line-height:1.2;
     white-space:pre;
-    text-shadow:0 0 8px #00ff44;
+
+    text-shadow:
+        0 0 8px #00ff44;
+
     animation:fall linear infinite;
 }
 
 @keyframes fall{
+
     0%{
         transform:translateY(-120px);
         opacity:0;
     }
 
-    10%{opacity:1}
-    90%{opacity:1}
+    10%{
+        opacity:1;
+    }
+
+    90%{
+        opacity:1;
+    }
 
     100%{
         transform:translateY(110vh);
@@ -84,7 +98,9 @@ body{
 
 h1{
     margin:0 0 20px;
+
     font-size:clamp(28px,7vw,55px);
+
     text-shadow:
         0 0 10px #00ff44,
         0 0 25px #00ff44;
@@ -93,81 +109,132 @@ h1{
 }
 
 @keyframes glitch{
-    0%,90%,100%{transform:none}
-    92%{transform:translateX(3px)}
-    94%{transform:translateX(-3px)}
+
+    0%,90%,100%{
+        transform:none;
+    }
+
+    92%{
+        transform:translateX(3px);
+    }
+
+    94%{
+        transform:translateX(-3px);
+    }
 }
 
 .alert{
     font-size:21px;
     margin-bottom:25px;
+
     animation:blink .5s infinite alternate;
 }
 
 @keyframes blink{
-    from{opacity:.4}
-    to{opacity:1}
+
+    from{
+        opacity:.4;
+    }
+
+    to{
+        opacity:1;
+    }
 }
 
 .row{
     direction:ltr;
+
     display:flex;
     justify-content:space-between;
+
     padding:14px 5px;
+
     border-bottom:1px solid #064d1b;
+
     font-size:16px;
+
     background:rgba(0,0,0,.55);
 }
 
 .value{
     color:#00ff44;
-    text-shadow:0 0 8px #00ff44;
+
+    text-shadow:
+        0 0 8px #00ff44;
 }
 
 #terminal{
     direction:ltr;
     text-align:left;
+
     height:100px;
+
     overflow:hidden;
+
     margin-top:22px;
+
     font-size:13px;
-    text-shadow:0 0 5px #00ff44;
+
+    text-shadow:
+        0 0 5px #00ff44;
 }
 
 .notice{
     margin-top:18px;
+
     padding:14px;
+
     border:1px solid #00ff44;
+
     color:#00ff44;
+
     font-size:15px;
+
     line-height:1.8;
+
     background:rgba(0,0,0,.7);
 }
 
 #soundButton{
+
     margin-top:15px;
+
     padding:10px 20px;
+
     background:#001b08;
+
     color:#00ff44;
+
     border:1px solid #00ff44;
+
     font-family:monospace;
+
     cursor:pointer;
 }
 
 
 /* =========================
-   شاشة النهاية
+   شاشة لينو
 ========================= */
 
 #endScreen{
+
     position:fixed;
+
     inset:0;
+
     background:#000;
+
     color:#00ff44;
+
     display:none;
+
     align-items:center;
+
     justify-content:center;
+
     text-align:center;
+
     z-index:9998;
 }
 
@@ -186,19 +253,27 @@ h1{
 
 
 /* =========================
-   الجامب سكير
+   شاشة النهاية / الجامب سكير
 ========================= */
 
 #jumpscare{
+
     position:fixed;
+
     inset:0;
+
     width:100vw;
     height:100vh;
+
     background:#000;
+
     display:none;
+
     align-items:center;
     justify-content:center;
+
     z-index:99999;
+
     overflow:hidden;
 }
 
@@ -208,33 +283,55 @@ h1{
 ========================= */
 
 #scareMatrix{
+
     position:absolute;
+
     inset:0;
+
     overflow:hidden;
+
     z-index:1;
+
     pointer-events:none;
-    opacity:.6;
+
+    opacity:.5;
 }
 
 .scareCode{
+
     position:absolute;
+
     top:-150px;
+
     color:#00ff44;
+
     font-size:18px;
+
     line-height:1.1;
-    text-shadow:0 0 8px #00ff44;
+
     white-space:pre;
-    animation:scareFall linear infinite;
+
+    text-shadow:
+        0 0 8px #00ff44;
+
+    animation:
+        scareFall linear infinite;
 }
 
 @keyframes scareFall{
+
     0%{
         transform:translateY(-150px);
         opacity:0;
     }
 
-    10%{opacity:1}
-    90%{opacity:1}
+    10%{
+        opacity:1;
+    }
+
+    90%{
+        opacity:1;
+    }
 
     100%{
         transform:translateY(120vh);
@@ -244,110 +341,76 @@ h1{
 
 
 /* =========================
-   صورة التخويف
+   المحتوى النهائي
 ========================= */
 
-#jumpscare img{
+.finalBox{
+
     position:relative;
-    z-index:2;
 
-    display:block;
+    z-index:5;
 
-    width:100vw;
-    height:100vh;
-
-    object-fit:cover;
-    object-position:center;
-
-    margin:0;
-    padding:0;
-    border:0;
-
-    animation:scareShake .05s infinite;
-}
-
-@keyframes scareShake{
-    0%{
-        transform:scale(1.05) translate(0,0);
-    }
-
-    25%{
-        transform:scale(1.08) translate(5px,-4px);
-    }
-
-    50%{
-        transform:scale(1.05) translate(-5px,4px);
-    }
-
-    75%{
-        transform:scale(1.08) translate(4px,5px);
-    }
-
-    100%{
-        transform:scale(1.05) translate(-4px,-5px);
-    }
-}
-
-
-/* =========================
-   مربع الحسابات
-========================= */
-
-.socials{
-    position:absolute;
-
-    z-index:10;
-
-    bottom:8%;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:88%;
+    width:90%;
 
     max-width:500px;
 
     text-align:center;
+}
 
-    color:#00ff44;
 
-    font-size:20px;
+/* LYNO */
+
+.lyno-title{
+
+    font-size:42px;
 
     font-weight:bold;
 
-    text-shadow:
-        0 0 5px #00ff44,
-        0 0 12px #00ff44,
-        0 0 22px #00ff44;
+    margin-bottom:18px;
 
-    background:rgba(0,0,0,.88);
+    color:#00ff44;
+
+    text-shadow:
+        0 0 8px #00ff44,
+        0 0 20px #00ff44,
+        0 0 35px #00ff44;
+}
+
+
+/* مربع الحسابات */
+
+.socials{
+
+    width:100%;
+
+    padding:18px 12px;
+
+    background:#000;
 
     border:2px solid #00ff44;
 
     border-radius:8px;
 
-    padding:14px 10px;
-}
-
-.lyno-title{
-    font-size:30px;
-
-    margin-bottom:10px;
-
     color:#00ff44;
+
+    font-size:21px;
+
+    font-weight:bold;
 
     text-shadow:
         0 0 5px #00ff44,
-        0 0 15px #00ff44,
-        0 0 25px #00ff44;
+        0 0 15px #00ff44;
+
+    box-shadow:
+        0 0 15px rgba(0,255,60,.35);
 }
 
 .socials div{
-    margin:7px 0;
+    margin:9px 0;
 }
 
 .socials span{
+
     color:#fff;
 
     text-shadow:
@@ -360,24 +423,27 @@ h1{
 
 @media(max-width:500px){
 
-    .socials{
-        bottom:7%;
-        width:90%;
-        font-size:17px;
-        padding:12px 8px;
+    .finalBox{
+        width:88%;
     }
 
     .lyno-title{
-        font-size:26px;
+        font-size:34px;
+    }
+
+    .socials{
+        font-size:18px;
+        padding:15px 8px;
     }
 
     .endContent p{
         font-size:23px;
     }
-
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -400,48 +466,75 @@ h1{
             ⚠ SYSTEM ALERT ⚠
         </div>
 
+
         <div class="row">
+
             <span>EMAIL</span>
+
             <span class="value">
                 **********gmail.com
             </span>
+
         </div>
 
+
         <div class="row">
+
             <span>PASSWORD</span>
+
             <span class="value">
                 *********
             </span>
+
         </div>
 
+
         <div class="row">
+
             <span>TIKTOK</span>
+
             <span class="value">
                 ii_go7
             </span>
+
         </div>
 
+
         <div class="row">
+
             <span>DISCORD</span>
+
             <span class="value">
                 ps4h
             </span>
+
         </div>
+
 
         <div id="terminal"></div>
 
+
         <div class="notice">
+
             ⚠ SYSTEM WARNING ⚠
+
             <br>
+
             LYNO&lt;/&gt; DEV
+
         </div>
 
+
         <button id="soundButton">
+
             🔊 اضغط لتفعيل الصوت
+
         </button>
 
     </div>
+
 </div>
+
 
 
 <!-- =========================
@@ -452,12 +545,18 @@ h1{
 
     <div class="endContent">
 
-        <h1>LYNO ❤️</h1>
+        <h1>
+            LYNO ❤️
+        </h1>
 
         <p>
+
             لينو يقول: مقلب 😂
+
             <br>
+
             ولا تفتح أي موقع غريب، مواح 🥺❤️
+
         </p>
 
     </div>
@@ -465,28 +564,46 @@ h1{
 </div>
 
 
+
 <!-- =========================
-     الجامب سكير
+     الشاشة الأخيرة
 ========================= -->
 
 <div id="jumpscare">
 
+    <!-- الأكواد الخضراء -->
+
     <div id="scareMatrix"></div>
 
-    <img src="scare.jpg" alt="">
 
-    <div class="socials">
+    <!-- المحتوى -->
+
+    <div class="finalBox">
 
         <div class="lyno-title">
+
             LYNO
+
         </div>
 
-        <div>
-            تيك توك: <span>ii_go7</span>
-        </div>
 
-        <div>
-            ديسكورد: <span>ps4h</span>
+        <div class="socials">
+
+            <div>
+
+                تيك توك:
+                <span>ii_go7</span>
+
+            </div>
+
+
+            <div>
+
+                ديسكورد:
+                <span>ps4h</span>
+
+            </div>
+
         </div>
 
     </div>
@@ -494,10 +611,12 @@ h1{
 </div>
 
 
+
 <script>
 
+
 /* =========================
-   رموز الهكر
+   رموز شاشة الهكر
 ========================= */
 
 const matrix =
@@ -505,6 +624,7 @@ document.getElementById("matrix");
 
 const chars =
 "01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@<>[]{}";
+
 
 for(let i=0;i<35;i++){
 
@@ -514,6 +634,7 @@ for(let i=0;i<35;i++){
     column.className="code";
 
     let text="";
+
 
     for(
         let j=0;
@@ -528,25 +649,33 @@ for(let i=0;i<35;i++){
         ];
 
         text += "<br>";
+
     }
 
+
     column.innerHTML=text;
+
 
     column.style.left =
     Math.random()*100+"%";
 
+
     column.style.animationDuration =
     (Math.random()*5+3)+"s";
+
 
     column.style.animationDelay =
     (-Math.random()*8)+"s";
 
+
     matrix.appendChild(column);
+
 }
 
 
+
 /* =========================
-   رموز الجامب سكير
+   رموز الشاشة الأخيرة
 ========================= */
 
 const scareMatrix =
@@ -554,6 +683,7 @@ document.getElementById("scareMatrix");
 
 const scareChars =
 "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@<>[]{}";
+
 
 for(let i=0;i<45;i++){
 
@@ -564,6 +694,7 @@ for(let i=0;i<45;i++){
 
     let text="";
 
+
     for(let j=0;j<20;j++){
 
         text += scareChars[
@@ -573,21 +704,29 @@ for(let i=0;i<45;i++){
         ];
 
         text += "<br>";
+
     }
 
+
     column.innerHTML=text;
+
 
     column.style.left =
     Math.random()*100+"%";
 
+
     column.style.animationDuration =
     (Math.random()*3+2)+"s";
+
 
     column.style.animationDelay =
     (-Math.random()*5)+"s";
 
+
     scareMatrix.appendChild(column);
+
 }
+
 
 
 /* =========================
@@ -595,39 +734,57 @@ for(let i=0;i<45;i++){
 ========================= */
 
 const messages=[
+
     "[SYSTEM] Initializing...",
+
     "[ALERT] Security warning...",
+
     "[SCAN] Running simulation...",
+
     "[WARNING] System alert...",
+
     "[SYSTEM] Connection established...",
+
     "[LYNO] Simulation active..."
+
 ];
 
+
 let n=0;
+
 
 function terminal(){
 
     const screen =
     document.getElementById("terminal");
 
+
     screen.innerHTML +=
     messages[n]+"<br>";
 
+
     n=(n+1)%messages.length;
 
+
     if(screen.children.length>7){
+
         screen.removeChild(
             screen.firstChild
         );
+
     }
+
 
     setTimeout(
         terminal,
         650
     );
+
 }
 
+
 terminal();
+
 
 
 /* =========================
@@ -635,7 +792,9 @@ terminal();
 ========================= */
 
 let audioContext=null;
+
 let audioEnabled=false;
+
 
 function enableAudio(){
 
@@ -643,24 +802,37 @@ function enableAudio(){
     window.AudioContext ||
     window.webkitAudioContext;
 
+
     if(!AudioContext)return;
 
+
     if(!audioContext){
-        audioContext=new AudioContext();
+
+        audioContext =
+        new AudioContext();
+
     }
+
 
     if(audioContext.state==="suspended"){
+
         audioContext.resume();
+
     }
 
+
     audioEnabled=true;
+
 
     document.getElementById(
         "soundButton"
     ).textContent="🔊 الصوت مفعل";
 
+
     startAlarm();
+
 }
+
 
 
 document.getElementById(
@@ -671,69 +843,88 @@ document.getElementById(
 );
 
 
+
 /* =========================
-   صوت الكيبورد والبرمجة
+   صوت الكيبورد
 ========================= */
 
 function startAlarm(){
 
     if(!audioContext)return;
 
+
     let count=0;
+
 
     function keySound(){
 
         const now =
         audioContext.currentTime;
 
+
         const osc =
         audioContext.createOscillator();
+
 
         const gain =
         audioContext.createGain();
 
+
         osc.type="square";
 
+
         const frequencies=[
+
             180,
             240,
             320,
             210,
             280,
             390
+
         ];
+
 
         osc.frequency.value =
         frequencies[
-            count%frequencies.length
+            count % frequencies.length
         ];
+
 
         gain.gain.setValueAtTime(
             .0001,
             now
         );
 
+
         gain.gain.exponentialRampToValueAtTime(
             .055,
             now+.005
         );
+
 
         gain.gain.exponentialRampToValueAtTime(
             .0001,
             now+.045
         );
 
+
         osc.connect(gain);
+
 
         gain.connect(
             audioContext.destination
         );
 
+
         osc.start(now);
+
 
         osc.stop(now+.05);
 
+
         count++;
+
 
         if(count<45){
 
@@ -746,8 +937,11 @@ function startAlarm(){
 
     }
 
+
     keySound();
+
 }
+
 
 
 /* =========================
@@ -756,9 +950,11 @@ function startAlarm(){
 
 setTimeout(()=>{
 
+
     document.getElementById(
         "hackScreen"
     ).style.display="none";
+
 
     document.getElementById(
         "endScreen"
@@ -767,9 +963,11 @@ setTimeout(()=>{
 
     setTimeout(()=>{
 
+
         document.getElementById(
             "endScreen"
         ).style.display="none";
+
 
         document.getElementById(
             "jumpscare"
@@ -777,21 +975,27 @@ setTimeout(()=>{
 
 
         if(audioEnabled){
+
             jumpSound();
+
         }
 
+
     },1800);
+
 
 },5000);
 
 
+
 /* =========================
-   صوت الجامب سكير
+   صوت الشاشة الأخيرة
 ========================= */
 
 function jumpSound(){
 
     if(!audioContext)return;
+
 
     const now =
     audioContext.currentTime;
@@ -799,6 +1003,7 @@ function jumpSound(){
 
     const osc =
     audioContext.createOscillator();
+
 
     const gain =
     audioContext.createGain();
@@ -812,10 +1017,12 @@ function jumpSound(){
         now
     );
 
+
     osc.frequency.exponentialRampToValueAtTime(
         1400,
         now+.12
     );
+
 
     osc.frequency.exponentialRampToValueAtTime(
         700,
@@ -828,10 +1035,12 @@ function jumpSound(){
         now
     );
 
+
     gain.gain.exponentialRampToValueAtTime(
         .22,
         now+.02
     );
+
 
     gain.gain.exponentialRampToValueAtTime(
         .0001,
@@ -841,12 +1050,14 @@ function jumpSound(){
 
     osc.connect(gain);
 
+
     gain.connect(
         audioContext.destination
     );
 
 
     osc.start(now);
+
 
     osc.stop(now+.7);
 
