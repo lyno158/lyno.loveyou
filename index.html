@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lyno.loveyou</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:#000;
+    color:#00ff44;
+    font-family:monospace;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+        0deg,
+        rgba(0,255,60,.05) 0px,
+        rgba(0,255,60,.05) 1px,
+        transparent 1px,
+        transparent 5px
+    );
+}
+
+.box{
+    width:92%;
+    max-width:700px;
+    padding:30px 20px;
+    background:#010501;
+    border:1px solid #00ff44;
+    box-shadow:
+        0 0 35px rgba(0,255,60,.35),
+        inset 0 0 25px rgba(0,255,60,.08);
+    text-align:center;
+}
+
+h1{
+    margin:0 0 20px;
+    font-size:clamp(28px,7vw,55px);
+    text-shadow:0 0 18px #00ff44;
+}
+
+.alert{
+    font-size:21px;
+    margin-bottom:25px;
+    animation:blink .7s infinite alternate;
+}
+
+@keyframes blink{
+    from{opacity:.45}
+    to{opacity:1}
+}
+
+.row{
+    direction:ltr;
+    display:flex;
+    justify-content:space-between;
+    padding:14px 5px;
+    border-bottom:1px solid #064d1b;
+    font-size:16px;
+}
+
+.value{
+    color:#00ff44;
+    text-shadow:0 0 8px #00ff44;
+}
+
+#terminal{
+    direction:ltr;
+    text-align:left;
+    height:100px;
+    overflow:hidden;
+    margin-top:22px;
+    font-size:13px;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    background:#001b08;
+    color:#00ff44;
+    border:1px solid #00ff44;
+    font-family:monospace;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>تم تهكيرك بواسطة لينو</h1>
+
+    <div class="alert">⚠ SYSTEM ALERT ⚠</div>
+
+    <div class="row">
+        <span>EMAIL</span>
+        <span class="value">*******</span>
+    </div>
+
+    <div class="row">
+        <span>PASSWORD</span>
+        <span class="value">*******</span>
+    </div>
+
+    <div class="row">
+        <span>TIKTOK</span>
+        <span class="value">ii_go7</span>
+    </div>
+
+    <div class="row">
+        <span>DISCORD</span>
+        <span class="value">ps4h</span>
+    </div>
+
+    <div id="terminal"></div>
+
+    <button onclick="startAlarm()">🔊 تشغيل الإنذار</button>
+
+</div>
+
+<script>
+
+const messages=[
+    "[SYSTEM] CONNECTION ESTABLISHED...",
+    "[ALERT] ACCESS DETECTED...",
+    "[SCAN] SEARCHING ACCOUNT...",
+    "[SYSTEM] SECURITY BYPASS...",
+    "[LYNO] ACCESS GRANTED...",
+    "[SYSTEM] DATA DISPLAYED..."
+];
+
+let n=0;
+
+function terminal(){
+    document.getElementById("terminal").innerHTML +=
+        messages[n]+"<br>";
+
+    n=(n+1)%messages.length;
+
+    setTimeout(terminal,650);
+}
+
+terminal();
+
+function startAlarm(){
+
+    const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+    if(!AudioContext) return;
+
+    const ctx=new AudioContext();
+
+    let count=0;
+
+    function beep(){
+
+        const osc=ctx.createOscillator();
+        const gain=ctx.createGain();
+
+        osc.type="square";
+        osc.frequency.value=
+            count%2===0 ? 950 : 520;
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            ctx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.09,
+            ctx.currentTime+0.01
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            ctx.currentTime+0.16
+        );
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime+0.17);
+
+        count++;
+
+        if(count<16){
+            setTimeout(beep,260);
+        }else{
+            ctx.close();
+        }
+    }
+
+    beep();
+}
+
+/* محاولة تشغيل الصوت عند فتح الصفحة */
+window.addEventListener("load",()=>{
+    try{
+        startAlarm();
+    }catch(e){}
+});
+
+</script>
+
+</body>
+</html>
