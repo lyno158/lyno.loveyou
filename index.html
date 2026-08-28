@@ -2,219 +2,741 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>lyno.loveyou</title>
 
 <style>
 *{box-sizing:border-box}
 
-body{
-    margin:0;
-    background:#000;
-    color:#00ff44;
-    font-family:monospace;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
+html,body{
+margin:0;
+width:100%;
+height:100%;
 }
 
-body:before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:repeating-linear-gradient(
-        0deg,
-        rgba(0,255,60,.05) 0px,
-        rgba(0,255,60,.05) 1px,
-        transparent 1px,
-        transparent 5px
-    );
+body{
+background:#000;
+color:#00ff44;
+font-family:monospace;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .box{
-    width:92%;
-    max-width:700px;
-    padding:30px 20px;
-    background:#010501;
-    border:1px solid #00ff44;
-    box-shadow:
-        0 0 35px rgba(0,255,60,.35),
-        inset 0 0 25px rgba(0,255,60,.08);
-    text-align:center;
+position:relative;
+width:92%;
+max-width:700px;
+padding:30px 20px;
+background:#010501;
+border:1px solid #00ff44;
+box-shadow:
+0 0 35px rgba(0,255,60,.4),
+inset 0 0 25px rgba(0,255,60,.1);
+text-align:center;
+overflow:hidden;
+}
+
+#matrix{
+position:absolute;
+inset:0;
+z-index:0;
+overflow:hidden;
+pointer-events:none;
+opacity:.28;
+}
+
+.code{
+position:absolute;
+top:-120px;
+color:#00ff44;
+font-size:18px;
+line-height:1.2;
+white-space:pre;
+text-shadow:0 0 8px #00ff44;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-120px);opacity:0}
+10%{opacity:1}
+90%{opacity:1}
+100%{transform:translateY(110vh);opacity:0}
+}
+
+.content{
+position:relative;
+z-index:2;
 }
 
 h1{
-    margin:0 0 20px;
-    font-size:clamp(28px,7vw,55px);
-    text-shadow:0 0 18px #00ff44;
+margin:0 0 20px;
+font-size:clamp(28px,7vw,55px);
+text-shadow:0 0 10px #00ff44,0 0 25px #00ff44;
+animation:glitch .8s infinite;
+}
+
+@keyframes glitch{
+0%,90%,100%{transform:none}
+92%{transform:translateX(3px)}
+94%{transform:translateX(-3px)}
 }
 
 .alert{
-    font-size:21px;
-    margin-bottom:25px;
-    animation:blink .7s infinite alternate;
+font-size:21px;
+margin-bottom:25px;
+animation:blink .5s infinite alternate;
 }
 
 @keyframes blink{
-    from{opacity:.45}
-    to{opacity:1}
+from{opacity:.4}
+to{opacity:1}
 }
 
 .row{
-    direction:ltr;
-    display:flex;
-    justify-content:space-between;
-    padding:14px 5px;
-    border-bottom:1px solid #064d1b;
-    font-size:16px;
+direction:ltr;
+display:flex;
+justify-content:space-between;
+padding:14px 5px;
+border-bottom:1px solid #064d1b;
+font-size:16px;
+background:rgba(0,0,0,.55);
 }
 
 .value{
-    color:#00ff44;
-    text-shadow:0 0 8px #00ff44;
+color:#00ff44;
+text-shadow:0 0 8px #00ff44;
 }
 
 #terminal{
-    direction:ltr;
-    text-align:left;
-    height:100px;
-    overflow:hidden;
-    margin-top:22px;
-    font-size:13px;
+direction:ltr;
+text-align:left;
+height:100px;
+overflow:hidden;
+margin-top:22px;
+font-size:13px;
+text-shadow:0 0 5px #00ff44;
 }
 
-button{
-    margin-top:15px;
-    padding:10px 20px;
-    background:#001b08;
-    color:#00ff44;
-    border:1px solid #00ff44;
-    font-family:monospace;
+.notice{
+margin-top:18px;
+padding:14px;
+border:1px solid #00ff44;
+color:#00ff44;
+font-size:15px;
+line-height:1.8;
+background:rgba(0,0,0,.7);
+}
+
+#soundButton{
+margin-top:15px;
+padding:10px 20px;
+background:#001b08;
+color:#00ff44;
+border:1px solid #00ff44;
+font-family:monospace;
+cursor:pointer;
+}
+
+/* شاشة النهاية */
+
+#endScreen{
+position:fixed;
+inset:0;
+background:#000;
+color:#00ff44;
+display:none;
+align-items:center;
+justify-content:center;
+text-align:center;
+z-index:9998;
+}
+
+.endContent h1{
+font-size:65px;
+}
+
+.endContent p{
+font-size:32px;
+}
+
+.endContent h2{
+font-size:27px;
+}
+
+/* الجامب سكير */
+
+#jumpscare{
+position:fixed;
+inset:0;
+width:100vw;
+height:100vh;
+background:#000;
+display:none;
+align-items:center;
+justify-content:center;
+z-index:99999;
+overflow:hidden;
+}
+
+#jumpscare img{
+display:block;
+width:100vw;
+height:100vh;
+object-fit:cover;
+object-position:center;
+margin:0;
+padding:0;
+border:0;
+animation:scareShake .05s infinite;
+}
+
+@keyframes scareShake{
+0%{transform:scale(1.05) translate(0,0)}
+25%{transform:scale(1.08) translate(5px,-4px)}
+50%{transform:scale(1.05) translate(-5px,4px)}
+75%{transform:scale(1.08) translate(4px,5px)}
+100%{transform:scale(1.05) translate(-4px,-5px)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="box" id="hackScreen">
 
-    <h1>تم تهكيرك بواسطة لينو</h1>
+<div id="matrix"></div>
 
-    <div class="alert">⚠ SYSTEM ALERT ⚠</div>
+<div class="content">
 
-    <div class="row">
-        <span>EMAIL</span>
-        <span class="value">*******</span>
-    </div>
+<h1>تم تهكيرك بواسطة لينو</h1>
 
-    <div class="row">
-        <span>PASSWORD</span>
-        <span class="value">*******</span>
-    </div>
+<div class="alert">
+⚠ SYSTEM ALERT ⚠
+</div>
 
-    <div class="row">
-        <span>TIKTOK</span>
-        <span class="value">ii_go7</span>
-    </div>
+<div class="row">
+<span>EMAIL</span>
+<span class="value">**********gmail.com</span>
+</div>
 
-    <div class="row">
-        <span>DISCORD</span>
-        <span class="value">ps4h</span>
-    </div>
+<div class="row">
+<span>PASSWORD</span>
+<span class="value">*********</span>
+</div>
 
-    <div id="terminal"></div>
+<div class="row">
+<span>TIKTOK</span>
+<span class="value">ii_go7</span>
+</div>
 
-    <button onclick="startAlarm()">🔊 تشغيل الإنذار</button>
+<div class="row">
+<span>DISCORD</span>
+<span class="value">ps4h</span>
+</div>
+
+<div id="terminal"></div>
+
+<div class="notice">
+⚠ SYSTEM WARNING ⚠
+<br>
+LYNO&lt;/&gt; DEV
+</div>
+
+<button id="soundButton">
+🔊 اضغط لتفعيل الصوت
+</button>
+
+</div>
+</div>
+
+
+<!-- شاشة لينو -->
+
+<div id="endScreen">
+
+<div class="endContent">
+
+<h1>LYNO ❤️</h1>
+
+<p>يقولك مواح 😭😂</p>
+
+<h2>مقلب، خفت؟</h2>
 
 </div>
 
+</div>
+
+
+<!-- صورة الجامب سكير -->
+
+<div id="jumpscare">
+
+<img src="scare.jpg" alt="">
+
+</div>
+
+
 <script>
 
+/* رموز الهكر */
+
+const matrix=document.getElementById("matrix");
+
+const chars=
+"01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@<>[]{}";
+
+for(let i=0;i<35;i++){
+
+const column=document.createElement("div");
+
+column.className="code";
+
+let text="";
+
+for(
+let j=0;
+j<Math.floor(Math.random()*15)+8;
+j++
+){
+
+text+=chars[
+Math.floor(Math.random()*chars.length)
+];
+
+text+="<br>";
+
+}
+
+column.innerHTML=text;
+
+column.style.left=Math.random()*100+"%";
+
+column.style.animationDuration=
+(Math.random()*5+3)+"s";
+
+column.style.animationDelay=
+(-Math.random()*8)+"s";
+
+matrix.appendChild(column);
+
+}
+
+
+/* أوامر الشاشة */
+
 const messages=[
-    "[SYSTEM] CONNECTION ESTABLISHED...",
-    "[ALERT] ACCESS DETECTED...",
-    "[SCAN] SEARCHING ACCOUNT...",
-    "[SYSTEM] SECURITY BYPASS...",
-    "[LYNO] ACCESS GRANTED...",
-    "[SYSTEM] DATA DISPLAYED..."
+
+"[SYSTEM] Initializing...",
+"[ALERT] Security warning...",
+"[SCAN] Running simulation...",
+"[WARNING] System alert...",
+"[SYSTEM] Connection established...",
+"[LYNO] Simulation active..."
+
 ];
 
 let n=0;
 
 function terminal(){
-    document.getElementById("terminal").innerHTML +=
-        messages[n]+"<br>";
 
-    n=(n+1)%messages.length;
+const screen=document.getElementById("terminal");
 
-    setTimeout(terminal,650);
+screen.innerHTML+=messages[n]+"<br>";
+
+n=(n+1)%messages.length;
+
+if(screen.children.length>7){
+
+screen.removeChild(screen.firstChild);
+
+}
+
+setTimeout(terminal,650);
+
 }
 
 terminal();
 
-function startAlarm(){
 
-    const AudioContext =
-        window.AudioContext ||
-        window.webkitAudioContext;
+/* الصوت */
 
-    if(!AudioContext) return;
+let audioContext=null;
 
-    const ctx=new AudioContext();
+let audioEnabled=false;
 
-    let count=0;
 
-    function beep(){
+function enableAudio(){
 
-        const osc=ctx.createOscillator();
-        const gain=ctx.createGain();
+const AudioContext=
+window.AudioContext||
+window.webkitAudioContext;
 
-        osc.type="square";
-        osc.frequency.value=
-            count%2===0 ? 950 : 520;
+if(!AudioContext)return;
 
-        gain.gain.setValueAtTime(
-            0.0001,
-            ctx.currentTime
-        );
+if(!audioContext){
 
-        gain.gain.exponentialRampToValueAtTime(
-            0.09,
-            ctx.currentTime+0.01
-        );
+audioContext=new AudioContext();
 
-        gain.gain.exponentialRampToValueAtTime(
-            0.0001,
-            ctx.currentTime+0.16
-        );
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start();
-        osc.stop(ctx.currentTime+0.17);
-
-        count++;
-
-        if(count<16){
-            setTimeout(beep,260);
-        }else{
-            ctx.close();
-        }
-    }
-
-    beep();
 }
 
-/* محاولة تشغيل الصوت عند فتح الصفحة */
-window.addEventListener("load",()=>{
-    try{
-        startAlarm();
-    }catch(e){}
-});
+if(audioContext.state==="suspended"){
+
+audioContext.resume();
+
+}
+
+audioEnabled=true;
+
+document.getElementById(
+"soundButton"
+).textContent="🔊 الصوت مفعل";
+
+startAlarm();
+
+}
+
+
+/* زر الصوت */
+
+document.getElementById(
+"soundButton"
+).addEventListener(
+"click",
+enableAudio
+);
+
+
+/* أول لمسة */
+
+document.addEventListener(
+"pointerdown",
+function(){
+
+if(!audioEnabled){
+
+enableAudio();
+
+}
+
+},
+{once:true}
+);
+
+
+/* صوت كيبورد وبرمجة */
+
+function startAlarm(){
+
+if(!audioContext)return;
+
+let count=0;
+
+
+function keySound(){
+
+const now=
+audioContext.currentTime;
+
+const osc=
+audioContext.createOscillator();
+
+const gain=
+audioContext.createGain();
+
+
+osc.type="square";
+
+
+const frequencies=[
+180,
+240,
+320,
+210,
+280,
+390
+];
+
+
+osc.frequency.value=
+frequencies[
+count%frequencies.length
+];
+
+
+gain.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.055,
+now+0.005
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.045
+);
+
+
+osc.connect(gain);
+
+gain.connect(
+audioContext.destination
+);
+
+
+osc.start(now);
+
+osc.stop(now+0.05);
+
+
+count++;
+
+
+if(count<45){
+
+setTimeout(
+keySound,
+Math.random()*100+35
+);
+
+}else{
+
+hackerBeep();
+
+}
+
+}
+
+
+function hackerBeep(){
+
+const now=
+audioContext.currentTime;
+
+const osc=
+audioContext.createOscillator();
+
+const gain=
+audioContext.createGain();
+
+
+osc.type="sawtooth";
+
+
+osc.frequency.setValueAtTime(
+500,
+now
+);
+
+osc.frequency.exponentialRampToValueAtTime(
+1100,
+now+0.12
+);
+
+osc.frequency.exponentialRampToValueAtTime(
+300,
+now+0.25
+);
+
+
+gain.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.07,
+now+0.02
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.28
+);
+
+
+osc.connect(gain);
+
+gain.connect(
+audioContext.destination
+);
+
+
+osc.start(now);
+
+osc.stop(now+0.3);
+
+}
+
+
+keySound();
+
+}
+
+
+/* الانتقال بعد 5 ثواني */
+
+setTimeout(()=>{
+
+document.getElementById(
+"hackScreen"
+).style.display="none";
+
+document.getElementById(
+"endScreen"
+).style.display="flex";
+
+
+/* شاشة لينو */
+
+setTimeout(()=>{
+
+document.getElementById(
+"endScreen"
+).style.display="none";
+
+document.getElementById(
+"jumpscare"
+).style.display="flex";
+
+
+if(audioEnabled){
+
+jumpSound();
+
+}
+
+},1800);
+
+},5000);
+
+
+/* صوت الجامب سكير */
+
+function jumpSound(){
+
+if(!audioContext)return;
+
+const now=
+audioContext.currentTime;
+
+
+/* الصوت الأول */
+
+const osc=
+audioContext.createOscillator();
+
+const gain=
+audioContext.createGain();
+
+
+osc.type="sawtooth";
+
+
+osc.frequency.setValueAtTime(
+180,
+now
+);
+
+osc.frequency.exponentialRampToValueAtTime(
+1400,
+now+0.12
+);
+
+osc.frequency.exponentialRampToValueAtTime(
+700,
+now+0.55
+);
+
+
+gain.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.22,
+now+0.02
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.7
+);
+
+
+osc.connect(gain);
+
+gain.connect(
+audioContext.destination
+);
+
+
+osc.start(now);
+
+osc.stop(now+0.7);
+
+
+/* الصوت الثاني */
+
+const osc2=
+audioContext.createOscillator();
+
+const gain2=
+audioContext.createGain();
+
+
+osc2.type="square";
+
+
+osc2.frequency.setValueAtTime(
+600,
+now
+);
+
+osc2.frequency.exponentialRampToValueAtTime(
+1800,
+now+0.08
+);
+
+osc2.frequency.exponentialRampToValueAtTime(
+400,
+now+0.5
+);
+
+
+gain2.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain2.gain.exponentialRampToValueAtTime(
+0.12,
+now+0.02
+);
+
+gain2.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.55
+);
+
+
+osc2.connect(gain2);
+
+gain2.connect(
+audioContext.destination
+);
+
+
+osc2.start(now);
+
+osc2.stop(now+0.55);
+
+}
 
 </script>
 
